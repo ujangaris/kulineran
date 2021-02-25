@@ -4,3 +4,7 @@ app{
 .router-link-exact-active{
     font-weight: bold;
 }
+
+.btn-success ,.badge-success{
+    background-color: #4eb883;
+}
