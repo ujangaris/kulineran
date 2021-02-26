@@ -8,3 +8,6 @@ app{
 .btn-success ,.badge-success{
     background-color: #4eb883;
 }
+.card-product, .card-img-top{
+    border-radius: 15px;
+}
