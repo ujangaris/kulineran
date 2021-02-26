@@ -1,3 +1,7 @@
 1. https://bootstrap-vue.org/docs
 2. https://fonts.google.com/specimen/Montserrat
 3. https://undraw.co/illustrations
+4. https://jsonplaceholder.typicode.com/
+    - https://github.com/typicode/json-server
+        -npm install -g json-server
+        -json-server --watch db.json
