@@ -1,10 +1,11 @@
 <template>
-  <h2>Caard Product</h2>
+  <h2>{{product.nama}}</h2>
 </template>
 
 <script>
 export default {
-    name: "CardProduct"
+    name: "CardProduct",
+    props: ["product"]
 }
 </script>
 

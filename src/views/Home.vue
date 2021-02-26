@@ -45,24 +45,21 @@ export default {
   },
   data(){
     return{
-      product:[]
+      products:[]
     }
   },
   methods:{
-    setProduct(data){
-      this.product = data;
+    setProducts(data){
+      this.products = data;
     }
   },
   mounted(){
     axios.get('http://localhost:3000/best-products')
-  .then(function (response) {
+  .then((response) => 
     // handle success
-    console.log("Berhasil :",response);
-  })
-  .catch(function (error) {
-    // handle error
-    console.log("Gagal :",error);
-  })
+    this.setProducts(response.data)
+  )
+  .catch((error) => console.log(error))
   }
 };
 </script>
