@@ -59,19 +59,30 @@
                     {{ keranjang.keterangan ? keranjang.keterangan : "-" }}
                   </td>
                   <td>
-                    {{ keranjang.jumlah_pemesanan}}
+                    {{ keranjang.jumlah_pemesanan }}
                   </td>
+                  <td align="right">Rp. {{ keranjang.products.harga }}</td>
                   <td align="right">
-                    Rp. {{ keranjang.products.harga}}
+                    <strong
+                      >Rp.
+                      {{
+                        keranjang.products.harga * keranjang.jumlah_pemesanan
+                      }}</strong
+                    >
                   </td>
-                  <td align="right">
-                    <strong>Rp. {{ keranjang.products.harga * keranjang.jumlah_pemesanan}}</strong>
+                  <td align="center" class="text-danger">
+                    <b-icon-trash
+                      @click="hapusKeranjang(keranjang.id)"
+                    ></b-icon-trash>
                   </td>
-                  <td align="center" class="text-danger"><b-icon-trash></b-icon-trash></td>
                 </tr>
                 <tr>
-                  <td colspan="6" align="right"><strong>Total Harga : </strong></td>
-                  <td align="right"><strong>Rp. {{totalHarga}}</strong></td>
+                  <td colspan="6" align="right">
+                    <strong>Total Harga : </strong>
+                  </td>
+                  <td align="right">
+                    <strong>Rp. {{ totalHarga }}</strong>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -100,6 +111,32 @@ export default {
     setKeranjangs(data) {
       this.keranjangs = data;
     },
+    hapusKeranjang(id) {
+      axios
+        .delete("http://localhost:3000/keranjangs/" + id)
+        .then(() => {
+          /* nyalakan ini untuk mengecek error dengan rensponse console 
+        .then((response) =>{
+        console.log('Hapus', response) */
+          this.$toast.error("Sukses hapus keranjang!", {
+            type: "error",
+            position: "top-right",
+            duration: 3000,
+            dismissible: true,
+          });
+
+          //memanggil isi method mounted agar user tidak perlu merefresh halaman
+          // update data keranjang
+          axios
+            .get("http://localhost:3000/keranjangs")
+            .then((response) =>
+              // handle success
+              this.setKeranjangs(response.data)
+            )
+            .catch((error) => console.log(error));
+        })
+        .catch((error) => console.log(error));
+    },
   },
   mounted() {
     axios
@@ -110,13 +147,13 @@ export default {
       )
       .catch((error) => console.log(error));
   },
-  computed:{
-    totalHarga(){
-      return this.keranjangs.reduce(function(items,data){
-        return items+(data.products.harga * data.jumlah_pemesanan) 
-      },0)
-    }
-  }
+  computed: {
+    totalHarga() {
+      return this.keranjangs.reduce(function (items, data) {
+        return items + data.products.harga * data.jumlah_pemesanan;
+      }, 0);
+    },
+  },
 };
 </script>
 
