@@ -1,6 +1,6 @@
 <template>
   <div class="keranjang">
-    <Navbar />
+    <Navbar :updateKeranjang="keranjangs"/>
     <div class="container">
       <!-- breadcrumb -->
       <div class="row mt-5">
