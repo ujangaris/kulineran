@@ -67,6 +67,11 @@
                   <td align="right">
                     <strong>Rp. {{ keranjang.products.harga * keranjang.jumlah_pemesanan}}</strong>
                   </td>
+                  <td align="center" class="text-danger"><b-icon-trash></b-icon-trash></td>
+                </tr>
+                <tr>
+                  <td colspan="6" align="right"><strong>Total Harga : </strong></td>
+                  <td align="right"><strong>Rp. {{totalHarga}}</strong></td>
                 </tr>
               </tbody>
             </table>
@@ -105,6 +110,13 @@ export default {
       )
       .catch((error) => console.log(error));
   },
+  computed:{
+    totalHarga(){
+      return this.keranjangs.reduce(function(items,data){
+        return items+(data.products.harga * data.jumlah_pemesanan) 
+      },0)
+    }
+  }
 };
 </script>
 
