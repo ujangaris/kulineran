@@ -33,20 +33,21 @@
           <h2>
             <strong>{{ product.nama }}</strong>
           </h2>
+          <hr>
           <h4>
             Harga : <strong>{{ product.harga }}</strong>
           </h4>
-          <form action="">
+          <form class="mt-4" v-on:submit.prevent>
               <div class="form-group">
                 <label for="jumlah_pemesanan">Jumlah Pemesanan</label>
-                <input type="number" name="" id="" class="form-control" >
+                <input type="number" class="form-control" v-model="pesan.jumlah_pemesanan">
               </div>
               <div class="form-group">
                 <label for="keterangan">Keterangan</label>
-                <textarea name="" class="form-control" placeholder="ket: pedas, nasi  1/2.."></textarea>
+                <textarea v-model="pesan.keterangan" class="form-control" placeholder="ket: pedas, nasi  1/2.."></textarea>
 
               </div>
-                <button type="submit" class="btn btn-success"><b-icon-cart></b-icon-cart> Pesan</button>
+                <button type="submit" class="btn btn-success" @click="pemesanan"><b-icon-cart></b-icon-cart> Pesan</button>
           </form>
         </div>
       </div>
@@ -66,12 +67,16 @@ export default {
   data() {
     return {
       product: {},
+      pesan: {},
     };
   },
   methods: {
     setProducts(data) {
       this.product = data;
     },
+    pemesanan(){
+        console.log(this.pesan)
+    }
   },
   mounted() {
     axios
