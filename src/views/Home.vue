@@ -60,6 +60,6 @@ export default {
     this.setProducts(response.data)
   )
   .catch((error) => console.log(error))
-  }
+  },
 };
 </script>
