@@ -12,11 +12,13 @@
           <div class="input-group mb-3">
             
             <input
+            v-model="search"
               type="text"
               class="form-control"
               placeholder="Cari Makanan kesukaan anda.."
               aria-label="Cari"
               aria-describedby="basic-addon1"
+              @keyup="searchFood"
             />
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">
@@ -54,12 +56,22 @@ export default {
   data() {
     return {
       products: [],
+      search: '',
     };
   },
   methods: {
     setProducts(data) {
       this.products = data;
     },
+    searchFood(){
+       axios
+      .get("http://localhost:3000/products?q="+this.search)
+      .then((response) =>
+        // handle success
+        this.setProducts(response.data)
+      )
+      .catch((error) => console.log(error));
+    }
   },
   mounted() {
     axios
