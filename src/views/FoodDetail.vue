@@ -33,21 +33,30 @@
           <h2>
             <strong>{{ product.nama }}</strong>
           </h2>
-          <hr>
+          <hr />
           <h4>
             Harga : <strong>{{ product.harga }}</strong>
           </h4>
           <form class="mt-4" v-on:submit.prevent>
-              <div class="form-group">
-                <label for="jumlah_pemesanan">Jumlah Pemesanan</label>
-                <input type="number" class="form-control" v-model="pesan.jumlah_pemesanan">
-              </div>
-              <div class="form-group">
-                <label for="keterangan">Keterangan</label>
-                <textarea v-model="pesan.keterangan" class="form-control" placeholder="ket: pedas, nasi  1/2.."></textarea>
-
-              </div>
-                <button type="submit" class="btn btn-success" @click="pemesanan"><b-icon-cart></b-icon-cart> Pesan</button>
+            <div class="form-group">
+              <label for="jumlah_pemesanan">Jumlah Pemesanan</label>
+              <input
+                type="number"
+                class="form-control"
+                v-model="pesan.jumlah_pemesanan"
+              />
+            </div>
+            <div class="form-group">
+              <label for="keterangan">Keterangan</label>
+              <textarea
+                v-model="pesan.keterangan"
+                class="form-control"
+                placeholder="ket: pedas, nasi  1/2.."
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-success" @click="pemesanan">
+              <b-icon-cart></b-icon-cart> Pesan
+            </button>
           </form>
         </div>
       </div>
@@ -74,9 +83,21 @@ export default {
     setProducts(data) {
       this.product = data;
     },
-    pemesanan(){
-        console.log(this.pesan)
-    }
+    pemesanan() {
+      // console.log(this.pesan)
+      this.pesan.products = this.product;
+      axios
+        .post("http://localhost:3000/keranjangs", this.pesan)
+        .then(() => {
+          this.$toast.success("Sukses masuk keranjang.", {
+            type: "success",
+            position: "top-right",
+            duration: 3000,
+            dismissible: true,
+          });
+        })
+        .catch((err) => console.log(err));
+    },
   },
   mounted() {
     axios
