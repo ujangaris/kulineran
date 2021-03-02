@@ -169,7 +169,12 @@ export default {
         axios
           .post("http://localhost:3000/pesanans", this.pesan)
           .then(() => {
-            
+            // Hapus Semua Keranjang
+            this.keranjangs.map(function (item) {
+              return axios
+                .delete("http://localhost:3000/keranjangs/" + item.id)
+                .catch((error) => console.log(error));
+            });
             this.$router.push({ path: "/pesanan-sukses" });
             this.$toast.success("Sukses Dipesan", {
               type: "success",
@@ -179,15 +184,15 @@ export default {
             });
           })
           .catch((err) => console.log(err));
-      }else{
+      } else {
         this.$toast.error("Nama dan Nomor Meja hrus di isi!", {
-            type: "error",
-            position: "top-right",
-            duration: 3000,
-            dismissible: true,
-          });
+          type: "error",
+          position: "top-right",
+          duration: 3000,
+          dismissible: true,
+        });
       }
-    }
+    },
   },
   mounted() {
     axios
