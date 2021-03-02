@@ -1,6 +1,6 @@
 <template>
   <div class="keranjang">
-    <Navbar :updateKeranjang="keranjangs"/>
+    <Navbar :updateKeranjang="keranjangs" />
     <div class="container">
       <!-- breadcrumb -->
       <div class="row mt-5">
@@ -89,6 +89,29 @@
           </div>
         </div>
       </div>
+      <!-- form checkout -->
+      <div class="row justify-content-end">
+        <div class="col-md-4">
+          <form class="mt-4" v-on:submit.prevent>
+            <div class="form-group">
+              <label for="nama">Nama :</label>
+              <input type="text" class="form-control" v-model="pesan.nama" />
+            </div>
+            <div class="form-group">
+              <label for="noMeja">Nomor Meja :</label>
+              <input type="text" class="form-control" v-model="pesan.noMeja" />
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-success float-right"
+              @click="checkout"
+            >
+              <b-icon-cart></b-icon-cart>Pesan
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -105,6 +128,7 @@ export default {
   data() {
     return {
       keranjangs: [],
+      pesan: [],
     };
   },
   methods: {
