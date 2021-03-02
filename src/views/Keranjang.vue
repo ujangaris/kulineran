@@ -128,7 +128,7 @@ export default {
   data() {
     return {
       keranjangs: [],
-      pesan: [],
+      pesan: {},
     };
   },
   methods: {
@@ -161,12 +161,24 @@ export default {
         })
         .catch((error) => console.log(error));
     },
-    checkout(){
+    checkout() {
       //chek degan console
       // console.log('pesan : ',  this.pesan)
-
-      if(this.pesan.nama && this.pesan.noMeja){
-          console.log('chek');
+      if (this.pesan.nama && this.pesan.noMeja) {
+        this.pesan.keranjangs = this.keranjangs;
+        axios
+          .post("http://localhost:3000/pesanans", this.pesan)
+          .then(() => {
+            
+            this.$router.push({ path: "/pesanan-sukses" });
+            this.$toast.success("Sukses Dipesan", {
+              type: "success",
+              position: "top-right",
+              duration: 3000,
+              dismissible: true,
+            });
+          })
+          .catch((err) => console.log(err));
       }else{
         this.$toast.error("Nama dan Nomor Meja hrus di isi!", {
             type: "error",
