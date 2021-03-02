@@ -7,3 +7,6 @@
         -json-server --watch db.json
     -https://github.com/axios/axios
 5. https://github.com/ankurk91/vue-toast-notification
+
+course:
+ https://www.youtube.com/watch?v=iz2ocdbAku0&list=PLIan8aHxsPj3a7oLHb2a8pw8IHBq45WYu&index=10
