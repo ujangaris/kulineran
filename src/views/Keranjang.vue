@@ -161,6 +161,21 @@ export default {
         })
         .catch((error) => console.log(error));
     },
+    checkout(){
+      //chek degan console
+      // console.log('pesan : ',  this.pesan)
+
+      if(this.pesan.nama && this.pesan.noMeja){
+          console.log('chek');
+      }else{
+        this.$toast.error("Nama dan Nomor Meja hrus di isi!", {
+            type: "error",
+            position: "top-right",
+            duration: 3000,
+            dismissible: true,
+          });
+      }
+    }
   },
   mounted() {
     axios
